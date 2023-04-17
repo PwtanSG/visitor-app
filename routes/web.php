@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [VisitorController::class,'create']);
+Route::post('/visitor', [VisitorController::class,'store']);
+Route::get('/visitor/register', [VisitorController::class,'create']);
+Route::get('/visitor', [VisitorController::class, 'index']);
+Route::get('/visitor/{id}', [VisitorController::class,'show']);
+Route::put('/visitor/{id}', [VisitorController::class,'update']);
+
+// Route::get('/home', function () {
+//     return view('home');
+// });
