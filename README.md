@@ -32,13 +32,19 @@ e.g http://visitor-app.test/admin/visitor/2 -> click checkout button
 1. git clone from \
 git clone https://github.com/PwtanSG/visitor-app.git
 
-2. duplicate .env.example to .env
+if using laragon, clone to \laragon\www folder \
+if using xampp clone to htdoc folder
+
+2. Create .env file in root folder & copy .env.example content to .env
 
 3. setup mySQL with \
-DB_DATABASE=visitordb
+DB_DATABASE=visitordb \
+if use laragon, click Database button and use HeidiSQL to create new database with name visitordb
+if using xampp, use myphp admin 
 
 4. generate APP_KEY for .env \
 php artisan key:generate
 
 5. seed AdminSeeder - for admin user login \
 php artisan make:seeder AdminSeeder
+
