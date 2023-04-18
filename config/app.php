@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Visitor Management Application'),
+    'shortname' => env('APP_SHORT_NAME', 'VMS'),
 
     /*
     |--------------------------------------------------------------------------

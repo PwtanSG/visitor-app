@@ -6,11 +6,12 @@
             {{ Session::get('success') }}
         </div>
     @endif
-    <a href="/visitor" class="btn btn-primary">Go Back</a>
+    <a href="/admin/visitor" class="btn btn-primary">Go Back</a>
     <h2>{{ config('app.name', '') }} : Administration</h2>
     <hr>
     <h3>Visitor Details</h3>
     <div>Check-in Id : {{ $record->id }}</div>
+    <div>Status : {{ $record->datetime_out ? 'OUT' : 'IN' }}</div>
     <div>Check-In : {{ $record->datetime_in }}</div>
     <div>Check-Out : {{ $record->datetime_out ?? '' }}</div>
     <div>Name : {{ $record->name }} </div>
@@ -19,7 +20,7 @@
     <div>Purpose of visit : {{ $record->purpose }} </div>
     <hr>
 
-    <form action="/visitor/{{ $record->id }}" method="post">
+    <form action="/admin/visitor/{{ $record->id }}" method="post">
         @method('PUT')
         <!-- CROSS Site Request Forgery Protection -->
         @csrf

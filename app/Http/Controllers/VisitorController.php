@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Visitor;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class VisitorController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index(Request $request)
     {
-        // return View('visitor');
-        // $visitor_records = Visitor::all();
         $search_keyword = $request->query('search');
         $datein_from = $request->query('checkin_from');
         $datein_to = $request->query('checkin_to');
@@ -90,6 +95,6 @@ class VisitorController extends Controller
         // $record->bgl = $request->input('bgl');
         $record->datetime_out = $current->toDateTimeString();
         $record->save();
-        return redirect('/visitor/' . $request->id)->with('success', 'You have check out successfully.');
+        return redirect('/admin/visitor/' . $request->id)->with('success', 'You have check out successfully.');
     }
 }

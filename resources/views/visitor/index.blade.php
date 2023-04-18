@@ -9,7 +9,28 @@
             </form>
         </div>
     </nav> --}}
+    @auth
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                {{ auth()->user()->name }} <span class="caret"></span>
+            </a>
 
+            <ul class="dropdown">
+                <li><a href="">Profile</a></li>
+                <li>
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+        </li>
+    @endauth
     <h3>{{ config('app.name', '') }} : Administration</h3>
     {{ app('request')->input('checkin_from') }}
     <div class="col col-sm-12">
@@ -58,22 +79,23 @@
     @if ($records->count())
         @php
             $user_filter_search = '';
-            if ((!empty(app('request')->input('search')))){
-                $user_filter_search = $user_filter_search . ' Search by : '. app('request')->input('search');
+            if (!empty(app('request')->input('search'))) {
+                $user_filter_search = $user_filter_search . ' Search by : ' . app('request')->input('search');
             }
-            if ((!empty(app('request')->input('checkin_from')))){
-                $user_filter_search = $user_filter_search . ' Check In From : '. app('request')->input('checkin_from');
+            if (!empty(app('request')->input('checkin_from'))) {
+                $user_filter_search = $user_filter_search . ' Check In From : ' . app('request')->input('checkin_from');
             }
-            if ((!empty(app('request')->input('checkin_to')))){
-                $user_filter_search = $user_filter_search . ' Check In To : '. app('request')->input('checkin_to');
+            if (!empty(app('request')->input('checkin_to'))) {
+                $user_filter_search = $user_filter_search . ' Check In To : ' . app('request')->input('checkin_to');
             }
         @endphp
 
-        <p class="mt-3">Total records found : {{ $records->count() }}. {{$user_filter_search}}</p>
+        <p class="mt-3">Total records found : {{ $records->count() }}. {{ $user_filter_search }}</p>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">#Id</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Check In</th>
                     <th scope="col">Check Out</th>
                     <th scope="col">Name</th>
@@ -93,6 +115,7 @@
                     @endphp
                     <tr class="cursor-pointer" onClick="location.href='visitor/{{ $record->id }}'">
                         <td scope="row">{{ $record->id }}</td>
+                        <td>{{ $record->datetime_out ? 'OUT' : 'IN' }}</td>
                         <td>{{ $record->datetime_in }}</td>
                         <td>{{ $record->datetime_out ?? '' }}</td>
                         <td>{{ $record->name }}</td>

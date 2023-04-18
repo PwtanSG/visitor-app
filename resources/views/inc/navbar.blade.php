@@ -12,7 +12,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="">
-                {{ config('app.name', 'Laravel') }}
+                {{ config('app.shortname', '') }}
             </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">

@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +16,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', [VisitorController::class,'create']);
 Route::post('/visitor', [VisitorController::class,'store']);
 Route::get('/visitor/register', [VisitorController::class,'create']);
-Route::get('/visitor', [VisitorController::class, 'index'])->name('visitor');
-Route::get('/visitor/{id}', [VisitorController::class,'show']);
-Route::put('/visitor/{id}', [VisitorController::class,'update']);
+
+Route::get('/admin/login', [LoginController::class, 'index'])->name('login');
+Route::post('/admin/login', [LoginController::class, 'store']);
+Route::post('/admin/logout', [LogoutController::class, 'store'])->name('logout');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/admin/visitor', [VisitorController::class, 'index'])->middleware('auth')->name('visitor');
+Route::get('/admin/visitor/{id}', [VisitorController::class,'show'])->middleware('auth');
+Route::put('/admin/visitor/{id}', [VisitorController::class,'update'])->middleware('auth');;
 
 // Route::get('/home', function () {
 //     return view('home');
