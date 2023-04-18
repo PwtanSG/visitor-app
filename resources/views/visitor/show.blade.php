@@ -6,7 +6,7 @@
             {{ Session::get('success') }}
         </div>
     @endif
-    <h2>{{ config('app.name', '') }} : Administration</h2>
+    <h3 class="mt-3">{{ config('app.name', '') }} </h3>
     <hr>
     <h3>Visitor Details</h3>
     <div>Check-in Id : {{ $record->id }}</div>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="container">
-            <a href="/admin/visitor" class="btn btn-primary col-5 col-sm-2">Go Back</a>
+            <a href="/admin/visitor" class="btn btn-primary col-5 col-sm-2">Back</a>
 
             @if ($record->datetime_out)
                 <a href="" class="btn btn-secondary col-5 col-sm-2 disabled">Check Out</a>
