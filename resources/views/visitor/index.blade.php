@@ -11,6 +11,7 @@
     </nav> --}}
 
     <h3>{{ config('app.name', '') }} : Administration</h3>
+    {{ app('request')->input('checkin_from') }}
     <div class="col col-sm-12">
         <form class="d-flex" action="" method="GET" role="search">
             <div class="me-1 col col-sm-2">
@@ -39,7 +40,7 @@
     </div>
 
     {{-- <div class="container">
-        <form action="" method="GET" role="search">
+        <form action="" method="POST" role="search">
             {{ csrf_field() }}
             <div class="input-group">
                 <input type="text" class="form-control" name="name" placeholder="Search">
@@ -55,6 +56,20 @@
     {{-- <a href="{{ route('visitor') }}">Button</a> --}}
 
     @if ($records->count())
+        @php
+            $user_filter_search = '';
+            if ((!empty(app('request')->input('search')))){
+                $user_filter_search = $user_filter_search . ' Search by : '. app('request')->input('search');
+            }
+            if ((!empty(app('request')->input('checkin_from')))){
+                $user_filter_search = $user_filter_search . ' Check In From : '. app('request')->input('checkin_from');
+            }
+            if ((!empty(app('request')->input('checkin_to')))){
+                $user_filter_search = $user_filter_search . ' Check In To : '. app('request')->input('checkin_to');
+            }
+        @endphp
+
+        <p class="mt-3">Total records found : {{ $records->count() }}. {{$user_filter_search}}</p>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -91,6 +106,6 @@
         {{-- AppServiceProvider boot add bootstrap --}}
         {{ $records->links() }}
     @else
-        <p>No record found.</p>
+        <p class="mt-3">No record found.</p>
     @endif
 @endsection

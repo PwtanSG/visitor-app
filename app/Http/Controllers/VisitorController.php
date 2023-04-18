@@ -17,31 +17,24 @@ class VisitorController extends Controller
         $datein_to = $request->query('checkin_to');
 
         $visitor_records = Visitor::where('datetime_in', '<=', date('Y-m-d') . ' 23:59:59');
-        if (!empty($datein_from)) {
-            $visitor_records = $visitor_records->where('datetime_in', '>=', $datein_from . ' 00:00:00');
-        }
-        if (!empty($datein_to)) {
-            $visitor_records = $visitor_records->where('datetime_in', '<=', $datein_to . ' 23:59:59');
-        }
+
         if (!empty($search_keyword)) {
-            $visitor_records= $visitor_records->where('name', 'LIKE', '%' . $search_keyword . '%')
+            $visitor_records->where('name', 'LIKE', '%' . $search_keyword . '%')
                 ->orWhere('email', 'LIKE', '%' . $search_keyword . '%')
                 ->orWhere('purpose', 'LIKE', '%' . $search_keyword . '%')
                 ->orWhere('contact', 'LIKE', '%' . $search_keyword . '%');
         }
+
+        if (!empty($datein_from)) {
+            $visitor_records->where('datetime_in', '>=', $datein_from . ' 00:00:00');
+        }
+        if (!empty($datein_to)) {
+            $visitor_records->where('datetime_in', '<=', $datein_to . ' 23:59:59');
+        }
+
         $visitor_records = $visitor_records->paginate(10);
-
         // dd($visitor_records);
 
-        // $visitor_records = Visitor::where('datetime_in', '<=', $datein_to . ' 23:59:59')
-        //     ->where('datetime_in', '>=', $datein_from . ' 00:00:00')
-        //     ->paginate(10);
-        // $visitor_records = Visitor::where('name', 'LIKE', '%' . $search_keyword . '%')
-        //     ->orWhere('email', 'LIKE', '%' . $search_keyword . '%')
-        //     ->orWhere('purpose', 'LIKE', '%' . $search_keyword . '%')
-        //     ->orWhere('contact', 'LIKE', '%' . $search_keyword . '%')
-        //     ->paginate(10);
-        // dd($visitor_records);
         return view('visitor.index', ['records' => $visitor_records]);
     }
 
@@ -49,9 +42,6 @@ class VisitorController extends Controller
     {
         // $userid = auth()->user()->id;
         $record = Visitor::findOrFail($id);
-        // if ($userid != $record->user_id){
-        //     abort(403);
-        // }
         return view('visitor.show', ['record' => $record]);
     }
 
