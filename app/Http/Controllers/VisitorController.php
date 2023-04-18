@@ -8,11 +8,16 @@ use Carbon\Carbon;
 
 class VisitorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // return View('visitor');
         // $visitor_records = Visitor::all();
-        $visitor_records = Visitor::paginate(10);
+        $search_keyword = $request->query('search');
+        $visitor_records = Visitor::where('name', 'LIKE', '%' . $search_keyword . '%')
+            ->orWhere('email', 'LIKE', '%' . $search_keyword . '%')
+            ->orWhere('purpose', 'LIKE', '%' . $search_keyword . '%')
+            ->orWhere('contact', 'LIKE', '%' . $search_keyword . '%')
+            ->paginate(10);
         // dd($visitor_records);
         return view('visitor.index', ['records' => $visitor_records]);
     }
@@ -72,6 +77,6 @@ class VisitorController extends Controller
         // $record->bgl = $request->input('bgl');
         $record->datetime_out = $current->toDateTimeString();
         $record->save();
-        return redirect('/visitor/'.$request->id)->with('success', 'You have check out successfully.');
+        return redirect('/visitor/' . $request->id)->with('success', 'You have check out successfully.');
     }
 }

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [VisitorController::class,'create']);
 Route::post('/visitor', [VisitorController::class,'store']);
 Route::get('/visitor/register', [VisitorController::class,'create']);
-Route::get('/visitor', [VisitorController::class, 'index']);
+Route::get('/visitor', [VisitorController::class, 'index'])->name('visitor');
 Route::get('/visitor/{id}', [VisitorController::class,'show']);
 Route::put('/visitor/{id}', [VisitorController::class,'update']);
 

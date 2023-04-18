@@ -24,7 +24,7 @@
         <!-- CROSS Site Request Forgery Protection -->
         @csrf
         <div class="form-group">
-            <input type="text" class="form-control" name="id" id="id" value="{{ $record->id }}" hidden>
+            <input type="hidden" class="form-control" name="id" id="id" value="{{ $record->id }}">
         </div>
         @if ($record->datetime_out)
             <a href="" class="btn btn-secondary col-12 col-sm-2 m-top m-right disabled">Check Out</a>
