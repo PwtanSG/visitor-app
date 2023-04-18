@@ -46,5 +46,5 @@ if using xampp, use myphp admin
 php artisan key:generate
 
 5. seed AdminSeeder - for admin user login \
-php artisan make:seeder AdminSeeder
+php artisan db:seed --class=AdminSeeder
 
