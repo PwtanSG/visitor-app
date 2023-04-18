@@ -1,7 +1,7 @@
 @section('content')
 @extends('layouts.app')
 
-    <h3 class="mt-3">{{ config('app.name', '') }} : Administration</h3>
+    <h3 class="mt-3">{{ config('app.name', '') }} </h3>
     {{ app('request')->input('checkin_from') }}
     <div class="col col-sm-12">
         <form class="d-flex" action="" method="GET" role="search">
@@ -44,7 +44,7 @@
             }
         @endphp
 
-        <p class="mt-3">Total records found : {{ $records->count() }}. {{ $user_filter_search }}</p>
+        <p class="mt-3">Total records found : {{ $records->total() }}. {{ $user_filter_search }}</p>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -81,7 +81,7 @@
             </tbody>
         </table>
         {{-- AppServiceProvider boot add bootstrap --}}
-        {{ $records->links() }}
+        {{ $records->links() }} 
     @else
         <p class="mt-3">No record found.</p>
     @endif

@@ -28,13 +28,13 @@
         </div>
 
         <div class="container">
-        <a href="/admin/visitor" class="btn btn-primary col-5 col-sm-2">Go Back</a>
+            <a href="/admin/visitor" class="btn btn-primary col-5 col-sm-2">Go Back</a>
 
-        @if ($record->datetime_out)
-            <a href="" class="btn btn-secondary col-5 col-sm-2 disabled">Check Out</a>
-        @else
-            <input type="submit" name="send" value="Check Out" class="btn btn-success col-5 col-sm-2">
-        @endif
+            @if ($record->datetime_out)
+                <a href="" class="btn btn-secondary col-5 col-sm-2 disabled">Check Out</a>
+            @else
+                <input type="submit" name="send" value="Check Out" class="btn btn-success col-5 col-sm-2">
+            @endif
         </div>
     </form>
 @endsection
