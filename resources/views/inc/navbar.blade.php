@@ -22,7 +22,7 @@
             <div class="d-flex">
                 @guest
                     <div class="text-white">
-                        <a class="m-2" href="/admin/login">
+                        <a class="m-2 text-decoration-none" href="/admin/login">
                             Login
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
