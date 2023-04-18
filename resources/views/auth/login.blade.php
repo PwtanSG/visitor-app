@@ -4,7 +4,14 @@
     <!-- Login Form -->
     <div class="container">
         <div class="row justify-content-center mt-5">
+
             <div class="col-lg-4 col-md-6 col-sm-6">
+                <!-- Register Success message -->
+                @if (Session::has('status'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('status') }}
+                    </div>
+                @endif
                 <div class="card shadow">
                     <div class="card-title text-center border-bottom">
                         <h3 class="p-3">
@@ -26,7 +33,7 @@
                                 <input id="email" type="email" class="form-control" name="email"
                                     value="{{ old('email') }}">
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="help-block text-danger">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
@@ -35,7 +42,7 @@
                                 <label for="password" class="form-label">Password</label>
                                 <input id="password" type="password" class="form-control" name="password">
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    <span class="help-block text-danger">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
