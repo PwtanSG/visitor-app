@@ -6,7 +6,6 @@
             {{ Session::get('success') }}
         </div>
     @endif
-    <a href="/admin/visitor" class="btn btn-primary">Go Back</a>
     <h2>{{ config('app.name', '') }} : Administration</h2>
     <hr>
     <h3>Visitor Details</h3>
@@ -27,10 +26,15 @@
         <div class="form-group">
             <input type="hidden" class="form-control" name="id" id="id" value="{{ $record->id }}">
         </div>
+
+        <div class="container">
+        <a href="/admin/visitor" class="btn btn-primary col-5 col-sm-2">Go Back</a>
+
         @if ($record->datetime_out)
-            <a href="" class="btn btn-secondary col-12 col-sm-2 m-top m-right disabled">Check Out</a>
+            <a href="" class="btn btn-secondary col-5 col-sm-2 disabled">Check Out</a>
         @else
-            <input type="submit" name="send" value="Check Out" class="btn btn-success col-12 col-sm-2">
+            <input type="submit" name="send" value="Check Out" class="btn btn-success col-5 col-sm-2">
         @endif
+        </div>
     </form>
 @endsection

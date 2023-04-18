@@ -1,37 +1,7 @@
-@extends('layouts.app')
 @section('content')
-    {{-- <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand">VMS</a>
-            <form class="d-flex" action="" method="GET" role="search">
-                <input name="name" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary" type="submit">Search</button>
-            </form>
-        </div>
-    </nav> --}}
-    @auth
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                {{ auth()->user()->name }} <span class="caret"></span>
-            </a>
+@extends('layouts.app')
 
-            <ul class="dropdown">
-                <li><a href="">Profile</a></li>
-                <li>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                              document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
-            </ul>
-        </li>
-    @endauth
-    <h3>{{ config('app.name', '') }} : Administration</h3>
+    <h3 class="mt-3">{{ config('app.name', '') }} : Administration</h3>
     {{ app('request')->input('checkin_from') }}
     <div class="col col-sm-12">
         <form class="d-flex" action="" method="GET" role="search">
@@ -59,22 +29,6 @@
             </div>
         </form>
     </div>
-
-    {{-- <div class="container">
-        <form action="" method="POST" role="search">
-            {{ csrf_field() }}
-            <div class="input-group">
-                <input type="text" class="form-control" name="name" placeholder="Search">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary">
-                        <span class="">Search</span>
-                    </button>
-                </span>
-            </div>
-        </form>
-    </div> --}}
-
-    {{-- <a href="{{ route('visitor') }}">Button</a> --}}
 
     @if ($records->count())
         @php
@@ -115,7 +69,7 @@
                     @endphp
                     <tr class="cursor-pointer" onClick="location.href='visitor/{{ $record->id }}'">
                         <td scope="row">{{ $record->id }}</td>
-                        <td>{{ $record->datetime_out ? 'OUT' : 'IN' }}</td>
+                        <td class={{ $record->datetime_out ? '' : 'text-danger' }}>{{ $record->datetime_out ? 'OUT' : 'IN' }}</td>
                         <td>{{ $record->datetime_in }}</td>
                         <td>{{ $record->datetime_out ?? '' }}</td>
                         <td>{{ $record->name }}</td>
