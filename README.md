@@ -48,3 +48,5 @@ php artisan key:generate
 5. seed AdminSeeder - for admin user login \
 php artisan db:seed --class=AdminSeeder
 
+6. demo screen recording \
+https://youtu.be/xMDUiJaUnaw
