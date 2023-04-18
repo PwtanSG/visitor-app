@@ -11,26 +11,26 @@
     </nav> --}}
 
     <h3>{{ config('app.name', '') }} : Administration</h3>
-    <div class="container-fluid">
+    <div class="col col-sm-12">
         <form class="d-flex" action="" method="GET" role="search">
-            <div class="me-1">
-                <label for="checkin_from">Check In (To):</label><br>
+            <div class="me-1 col col-sm-2">
+                <label for="checkin_from">Check In (From):</label><br>
                 <input name="checkin_from" class="form-control me-2" type="date" placeholder="dd-mm-yyyy"
                     value="{{ app('request')->input('checkin_from') }}" min="2000-01-01" max="{{ date('Y-m-d') }}"
                     aria-label="Search">
             </div>
-            <div class="me-1">
+            <div class="me-1 col col-sm-2">
                 <label for="checkin_to">Check In (To):</label><br>
                 <input name="checkin_to" class="form-control me-2" type="date" placeholder="dd-mm-yyyy"
                     value="{{ app('request')->input('checkin_to') }}" min="2000-01-01" max="{{ date('Y-m-d') }}"
                     aria-label="Search">
             </div>
-            <div class="me-1 col-md-4">
+            <div class="me-1 col col-sm-2">
                 <label for="search">Search:</label><br>
                 <input name="search" class="form-control me-2" type="search" placeholder="Search keyword"
                     value="{{ app('request')->input('search') }}" aria-label="Search">
             </div>
-            <div class="me-1">
+            <div class="me-1 col col-sm-3">
                 <label for=""></label><br>
                 <button class="btn btn-outline-primary" type="submit">Search</button>
                 <a href="{{ route('visitor') }}" class="btn btn-outline-primary">Clear</a>
@@ -62,7 +62,7 @@
                     <th scope="col">Check In</th>
                     <th scope="col">Check Out</th>
                     <th scope="col">Name</th>
-                    <th scope="col" class="d-none d-sm-block">Email</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Contact</th>
                     <th scope="col">Purpose</th>
                     {{-- <th scope="col">Actions</th> --}}
@@ -78,10 +78,10 @@
                     @endphp
                     <tr class="cursor-pointer" onClick="location.href='visitor/{{ $record->id }}'">
                         <td scope="row">{{ $record->id }}</td>
-                        <td>{{ $record->created_at }}</td>
+                        <td>{{ $record->datetime_in }}</td>
                         <td>{{ $record->datetime_out ?? '' }}</td>
                         <td>{{ $record->name }}</td>
-                        <td class="d-none d-sm-block">{{ $record->email }}</td>
+                        <td>{{ $record->email }}</td>
                         <td>{{ $record->contact }}</td>
                         <td>{{ $record->purpose }}</td>
                     </tr>

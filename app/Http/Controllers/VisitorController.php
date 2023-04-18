@@ -13,11 +13,34 @@ class VisitorController extends Controller
         // return View('visitor');
         // $visitor_records = Visitor::all();
         $search_keyword = $request->query('search');
-        $visitor_records = Visitor::where('name', 'LIKE', '%' . $search_keyword . '%')
-            ->orWhere('email', 'LIKE', '%' . $search_keyword . '%')
-            ->orWhere('purpose', 'LIKE', '%' . $search_keyword . '%')
-            ->orWhere('contact', 'LIKE', '%' . $search_keyword . '%')
-            ->paginate(10);
+        $datein_from = $request->query('checkin_from');
+        $datein_to = $request->query('checkin_to');
+
+        $visitor_records = Visitor::where('datetime_in', '<=', date('Y-m-d') . ' 23:59:59');
+        if (!empty($datein_from)) {
+            $visitor_records = $visitor_records->where('datetime_in', '>=', $datein_from . ' 00:00:00');
+        }
+        if (!empty($datein_to)) {
+            $visitor_records = $visitor_records->where('datetime_in', '<=', $datein_to . ' 23:59:59');
+        }
+        if (!empty($search_keyword)) {
+            $visitor_records= $visitor_records->where('name', 'LIKE', '%' . $search_keyword . '%')
+                ->orWhere('email', 'LIKE', '%' . $search_keyword . '%')
+                ->orWhere('purpose', 'LIKE', '%' . $search_keyword . '%')
+                ->orWhere('contact', 'LIKE', '%' . $search_keyword . '%');
+        }
+        $visitor_records = $visitor_records->paginate(10);
+
+        // dd($visitor_records);
+
+        // $visitor_records = Visitor::where('datetime_in', '<=', $datein_to . ' 23:59:59')
+        //     ->where('datetime_in', '>=', $datein_from . ' 00:00:00')
+        //     ->paginate(10);
+        // $visitor_records = Visitor::where('name', 'LIKE', '%' . $search_keyword . '%')
+        //     ->orWhere('email', 'LIKE', '%' . $search_keyword . '%')
+        //     ->orWhere('purpose', 'LIKE', '%' . $search_keyword . '%')
+        //     ->orWhere('contact', 'LIKE', '%' . $search_keyword . '%')
+        //     ->paginate(10);
         // dd($visitor_records);
         return view('visitor.index', ['records' => $visitor_records]);
     }
@@ -53,10 +76,10 @@ class VisitorController extends Controller
         ]);
         $current = Carbon::now();
         Visitor::create([
-            'name' => $request->name,
+            'name' => htmlentities($request->name),
             'email' => $request->email,
-            'contact' => $request->contact,
-            'purpose' => $request->purpose,
+            'contact' => htmlentities($request->contact),
+            'purpose' => htmlentities($request->purpose),
             'datetime_in' => $current->toDateTimeString(),
             // 'datetime_in' => date('Y-m-d H:i:s')
         ]);
