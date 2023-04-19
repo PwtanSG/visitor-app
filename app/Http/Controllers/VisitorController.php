@@ -27,7 +27,8 @@ class VisitorController extends Controller
             $visitor_records->where('name', 'LIKE', '%' . $search_keyword . '%')
                 ->orWhere('email', 'LIKE', '%' . $search_keyword . '%')
                 ->orWhere('purpose', 'LIKE', '%' . $search_keyword . '%')
-                ->orWhere('contact', 'LIKE', '%' . $search_keyword . '%');
+                ->orWhere('contact', 'LIKE', '%' . $search_keyword . '%')
+                ->orWhere('transport', 'LIKE', '%' . $search_keyword . '%');
         }
 
         if (!empty($datein_from)) {
