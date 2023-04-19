@@ -43,6 +43,12 @@ command : composer install
 3. setup database \
 a.  Create Database visitordb in mySQL \
 .env specified DB_DATABASE=visitordb \
+
+Create DB via artisan CLI \
+with DB started : \
+command : php artisan db:create
+
+For manually create
 if use laragon, click Database button and use HeidiSQL to create new database with name visitordb \
 if using xampp, use myphp admin \ 
 
