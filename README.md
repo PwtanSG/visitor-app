@@ -6,8 +6,8 @@
     - e.g http://visitor-app.test/visitor/register
 
 **Admin route - auth - login required** \
-    - admin login (see point #5 below - u need to seed a admin user)
-    - /admin/login
+    - admin login (see point #5 below - u need to seed a admin user) \
+    - /admin/login \
     - e.g http://visitor-app.test/admin/login
 
 **admin dashboard** \
