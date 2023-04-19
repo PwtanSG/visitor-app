@@ -82,7 +82,8 @@
             </tbody>
         </table>
         {{-- AppServiceProvider boot add bootstrap --}}
-        {{ $records->links() }} 
+        {{-- {{ $records->links() }} --}}
+        {{ $records->appends(request()->query())->links() }}
     @else
         <p class="mt-3">No record found.</p>
     @endif
