@@ -1,4 +1,4 @@
-Visitor Registration System - using Laravel, Bootstrap and MySQL
+## Visitor Registration System - using Laravel, Bootstrap and MySQL
 
 ## page routes
 Visitor registration page - no auth\
@@ -7,7 +7,7 @@ e.g http://visitor-app.test/visitor/register
 
 Admin route - auth - login required
 
-admin login (see point #5 below - need to seed a admin user) \
+admin login (see point #5 below - u need to seed a admin user) \
 /admin/login \
 e.g http://visitor-app.test/admin/login
 
@@ -24,7 +24,7 @@ e.g http://visitor-app.test/admin/visitor
 e.g http://visitor-app.test/admin/visitor/2
 
 - admin checkout visitor 
-e.g http://visitor-app.test/admin/visitor/2 -> click checkout button
+e.g http://visitor-app.test/admin/visitor/2 -> click checkout button 
 
 
 ## Steps to setup
@@ -40,20 +40,20 @@ command : composer install
 
 2. Create .env file in root folder & copy .env.example content to .env
 
-3. setup database 
+3. setup database \
 a.  Create Database visitordb in mySQL \
 .env specified DB_DATABASE=visitordb \
 if use laragon, click Database button and use HeidiSQL to create new database with name visitordb \
 if using xampp, use myphp admin \ 
 
 b. DB visitors table
-start your db in laragon or xampp
-run laravel visitor migration file 
-command : php artisan migrate
+start your db in laragon or xampp \
+run laravel visitor migration file \
+command : php artisan migrate 
 
 4. generate APP_KEY for .env \
-start your app in laragon or xampp
-command : php artisan key:generate
+start your app in laragon or xampp \
+command : php artisan key:generate \
 
 5. seed AdminSeeder - for admin user login \
 command : php artisan db:seed --class=AdminSeeder
