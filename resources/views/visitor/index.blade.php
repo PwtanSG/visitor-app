@@ -54,6 +54,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Contact</th>
+                    <th scope="col">Transport</th>
                     <th scope="col">Purpose</th>
                     {{-- <th scope="col">Actions</th> --}}
                 </tr>
@@ -74,6 +75,7 @@
                         <td>{{ $record->name }}</td>
                         <td>{{ $record->email }}</td>
                         <td>{{ $record->contact }}</td>
+                        <td>{{ $record->transport ?? '' }}</td>
                         <td>{{ $record->purpose }}</td>
                     </tr>
                 @endforeach

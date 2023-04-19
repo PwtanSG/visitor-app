@@ -14,6 +14,7 @@ class Visitor extends Model
         'email',
         'contact',
         'purpose',
+        'transport',
         'datetime_in',
         'datetime_out',
     ];   

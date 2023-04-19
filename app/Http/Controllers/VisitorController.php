@@ -57,11 +57,13 @@ class VisitorController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $this->validate($request, [
             'name' => 'required|min:3',
             'contact' => 'required|min:8|max:15',
             'email' => 'required|email',
             'purpose' => 'required|max:255',
+            'transport' => 'required|max:10'
         ], [
             '*.required' => 'This field is required',
             'name.min' => 'min 3 characters',
@@ -76,6 +78,7 @@ class VisitorController extends Controller
             'contact' => htmlentities($request->contact),
             'purpose' => htmlentities($request->purpose),
             'datetime_in' => $current->toDateTimeString(),
+            'transport' => $request->transport,
             // 'datetime_in' => date('Y-m-d H:i:s')
         ]);
 

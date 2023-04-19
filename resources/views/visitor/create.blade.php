@@ -1,5 +1,5 @@
 @section('content')
-@extends('layouts.app')
+    @extends('layouts.app')
     <h3 class="mt-3">Visitor Registration Form</h3>
     <div class="container mt-3">
 
@@ -46,6 +46,19 @@
                 @endif
                 <input type="text" class="form-control {{ $errors->has('contact') ? 'border border-danger' : '' }}"
                     name="contact" id="contact" placeholder="Enter your contact no." value="{{ old('contact') }}">
+            </div>
+
+            <div class="form-group {{ $errors->has('transport') ? ' has-error' : '' }} mt-2">
+                <label><strong>Transport Type : </strong><span class="text-danger">*</span></label>
+                <input type="radio" name="transport" value="Walk In"
+                    {{ old('transport') == 'Walk In' ? 'checked' : '' }}> Walk-in
+                <input type="radio" name="transport" value="Vehicle"
+                    {{ old('transport') == 'Vehicle' ? 'checked' : '' }}> Vehicle
+                @if ($errors->has('transport'))
+                    <span class="help-block text-danger">
+                        <strong>{{ $errors->first('transport') }}</strong>
+                    </span>
+                @endif
             </div>
 
             <div class="form-group {{ $errors->has('purpose') ? ' has-error' : '' }} mt-2">

@@ -16,6 +16,7 @@
     <div>Name : {{ $record->name }} </div>
     <div>Email : {{ $record->email ?? '' }} </div>
     <div>Contact no : {{ $record->contact }} </div>
+    <div>Transport : {{ $record->transport }} </div>
     <div>Purpose of visit : {{ $record->purpose }} </div>
     <hr>
 
