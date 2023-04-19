@@ -63,7 +63,8 @@ class VisitorController extends Controller
             'contact' => 'required|min:8|max:15',
             'email' => 'required|email',
             'purpose' => 'required|max:255',
-            'transport' => 'required|max:10'
+            'transport' => 'required|max:10',
+            // 'vehicle_no' => 'required_if:transport,vehicle'
         ], [
             '*.required' => 'This field is required',
             'name.min' => 'min 3 characters',
