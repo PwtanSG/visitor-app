@@ -53,7 +53,7 @@ command : php artisan migrate
 
 4. generate APP_KEY for .env \
 start your app in laragon or xampp \
-command : php artisan key:generate \
+command : php artisan key:generate 
 
 5. seed AdminSeeder - for admin user login \
 command : php artisan db:seed --class=AdminSeeder
