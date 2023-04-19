@@ -1,4 +1,4 @@
-Visitor Registration System
+Visitor Registration System - using Laravel, Bootstrap and MySQL
 
 ## page routes
 Visitor registration page - no auth\
@@ -30,23 +30,33 @@ e.g http://visitor-app.test/admin/visitor/2 -> click checkout button
 ## Steps to setup
 
 1. git clone from \
-git clone https://github.com/PwtanSG/visitor-app.git
+a. git clone https://github.com/PwtanSG/visitor-app.git
 
 if using laragon, clone to \laragon\www folder \
 if using xampp clone to htdoc folder
 
+b. install packages
+command : composer install
+
 2. Create .env file in root folder & copy .env.example content to .env
 
-3. setup mySQL with \
-DB_DATABASE=visitordb \
-if use laragon, click Database button and use HeidiSQL to create new database with name visitordb
-if using xampp, use myphp admin 
+3. setup database 
+a.  Create Database visitordb in mySQL \
+.env specified DB_DATABASE=visitordb \
+if use laragon, click Database button and use HeidiSQL to create new database with name visitordb \
+if using xampp, use myphp admin \ 
+
+b. DB visitors table
+start your db in laragon or xampp
+run laravel visitor migration file 
+command : php artisan migrate
 
 4. generate APP_KEY for .env \
-php artisan key:generate
+start your app in laragon or xampp
+command : php artisan key:generate
 
 5. seed AdminSeeder - for admin user login \
-php artisan db:seed --class=AdminSeeder
+command : php artisan db:seed --class=AdminSeeder
 
 6. demo screen recording \
 https://youtu.be/xMDUiJaUnaw
