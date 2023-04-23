@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <title>{{ config('app.name', 'Visitor Management') }}</title>
 </head>
-<style>
+{{-- <style>
     .cursor-pointer {cursor: pointer;}
-</style>
+</style> --}}
 <body>
     @include('inc.navbar')
     <div class="content">
