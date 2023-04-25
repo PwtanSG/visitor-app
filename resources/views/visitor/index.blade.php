@@ -44,6 +44,19 @@
         @endphp
 
         <p class="mt-3">Total records found : {{ $records->total() }}. {{ $user_filter_search }}</p>
+        {{-- <form action="{{ route('view-pdf') }}" method="post" target="__blank">
+            @csrf
+            <button class="text-white bg-primary">
+                View PDF
+            </button>
+        </form> --}}
+        <form action="{{ route('download-pdf') }}" method="post" target="__blank">
+            @csrf
+            {{-- <button class="text-white bg-primary">
+                Download PDF
+            </button> --}}
+            <button class="btn btn-primary" type="submit">Download PDF</button>
+        </form>
         <table class="table table-striped">
             <thead>
                 <tr>

@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Visitor;
 use App\Models\User;
+// use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+// use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class VisitorController extends Controller
 {
@@ -112,5 +116,21 @@ class VisitorController extends Controller
         $record->datetime_out = $current->toDateTimeString();
         $record->save();
         return redirect('/admin/visitor/' . $request->id)->with('success', 'You have check out successfully.');
+    }
+
+    public function viewPDF()
+    {
+
+        $visitors = Visitor::all();
+        $pdf = PDF::loadView('pdf.visitorlist', array('visitors' => $visitors))->setPaper('a4', 'landscape');
+        return $pdf->stream();
+    }
+
+    public function downloadPDF()
+    {
+
+        $visitors = Visitor::all();
+        $pdf = PDF::loadView('pdf.visitorlist', array('visitors' => $visitors))->setPaper('a4', 'landscape');
+        return $pdf->download('visitors-list.pdf');
     }
 }
