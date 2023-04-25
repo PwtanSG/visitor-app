@@ -18,6 +18,11 @@
     <div>Contact no : {{ $record->contact }} </div>
     <div>Transport : {{ $record->transport }} </div>
     <div>Purpose of visit : {{ $record->purpose }} </div>
+    @if ($record->filepath)
+        <div>Documents : <a href={{ $record->filepath }}>Download</a></td>
+    @else
+        <div>Documents : Nil</a></td>
+    @endif
     <hr>
 
     <form action="/admin/visitor/{{ $record->id }}" method="post">

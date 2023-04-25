@@ -51,6 +51,7 @@ class VisitorController extends Controller
         return view('visitor.show', ['record' => $record]);
     }
 
+
     public function create()
     {
         return view('visitor.create');
@@ -58,7 +59,7 @@ class VisitorController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request->all());
         $this->validate($request, [
             'name' => 'required|min:3',
             'contact' => 'required|min:8|max:15',
@@ -73,6 +74,15 @@ class VisitorController extends Controller
             'contact.max' => 'Exceeded max 15 digits'
             // 'contact.required' => 'This field is required',
         ]);
+
+        $filename = '';
+        if ($request->hasFile('document')) {
+            $filename = $request->getSchemeAndHttpHost(). '/docs/' . time() . '.' . $request->document->extension();
+            // dd($filename);
+            $request->document->move(public_path('/docs/'), $filename );
+        }
+
+
         $current = Carbon::now();
         Visitor::create([
             'name' => htmlentities($request->name),
@@ -81,6 +91,7 @@ class VisitorController extends Controller
             'purpose' => htmlentities($request->purpose),
             'datetime_in' => $current->toDateTimeString(),
             'transport' => $request->transport,
+            'filepath' => $filename,
             // 'datetime_in' => date('Y-m-d H:i:s')
         ]);
 

@@ -10,7 +10,7 @@
             </div>
         @endif
 
-        <form action="/visitor" method="post">
+        <form action="/visitor" method="post" enctype="multipart/form-data">
             <!-- CROSS Site Request Forgery Protection -->
             @csrf
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }} mt-2">
@@ -71,6 +71,19 @@
                 <textarea class="form-control {{ $errors->has('purpose') ? 'border border-danger' : '' }}" name="purpose"
                     id="purpose" rows="3" cols="30" placeholder="Enter purpose of visit/remarks">{{ old('purpose') }}</textarea>
             </div>
+            <div class="form-group {{ $errors->has('document') ? ' has-error' : '' }} mt-2">
+                <label><strong> Document </strong><span class="text-danger"></span></label>
+                @if ($errors->has('document'))
+                    <span class="help-block text-danger">
+                        <strong>{{ $errors->first('document') }}</strong>
+                    </span>
+                @endif
+                <input type="file" class="form-control {{ $errors->has('document') ? 'border border-danger' : '' }}"
+                    accept="image/png,.jpeg,.jpg,.pdf,.doc" name="document" id="document" placeholder="select file."
+                    value="{{ old('document') }}">
+            </div>
+
+
             {{-- <input type="submit" name="send" value="Submit" class="btn btn-primary mt-3 col-12 col-sm-2"> --}}
             <Button type="submit" name="send" class="btn btn-primary mt-3 col-12 col-sm-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

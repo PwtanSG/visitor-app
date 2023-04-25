@@ -1,5 +1,5 @@
 @section('content')
-@extends('layouts.app')
+    @extends('layouts.app')
 
     <h3 class="mt-3">{{ config('app.name', '') }} </h3>
     <div class="col col-sm-12">
@@ -56,6 +56,7 @@
                     <th scope="col">Contact</th>
                     <th scope="col">Transport</th>
                     <th scope="col">Purpose</th>
+                    <th scope="col">Document</th>
                     {{-- <th scope="col">Actions</th> --}}
                 </tr>
             </thead>
@@ -69,7 +70,8 @@
                     @endphp
                     <tr class="cursor-pointer" onClick="location.href='visitor/{{ $record->id }}'">
                         <td scope="row">{{ $record->id }}</td>
-                        <td class={{ $record->datetime_out ? '' : 'text-danger' }}>{{ $record->datetime_out ? 'OUT' : 'IN' }}</td>
+                        <td class={{ $record->datetime_out ? '' : 'text-danger' }}>
+                            {{ $record->datetime_out ? 'OUT' : 'IN' }}</td>
                         <td>{{ $record->datetime_in }}</td>
                         <td>{{ $record->datetime_out ?? '' }}</td>
                         <td>{{ $record->name }}</td>
@@ -77,6 +79,11 @@
                         <td>{{ $record->contact }}</td>
                         <td>{{ $record->transport ?? '' }}</td>
                         <td>{{ $record->purpose }}</td>
+                        @if ($record->filepath)
+                            <td><a href={{$record->filepath}}>Download</a></td>
+                        @else
+                            <td>{{$record->filepath}}</td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

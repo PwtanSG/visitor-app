@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                             @csrf
-                            <div class="mb-4">
+                            {{-- <div class="mb-4">
                                 <label for="email" class="form-label">Email</label>
                                 <input id="email" type="email" class="form-control" name="email"
                                     value="{{ old('email') }}">
@@ -37,16 +37,27 @@
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
+                            </div> --}}
+                            <div class="form-floating mb-4">
+                                <input type="email" class="form-control" id="email" placeholder="Enter email"
+                                    name="email" value="{{ old('email') }}">
+                                <label for="email" class="form-label text-secondary">Email</label>
+                                @if ($errors->has('email'))
+                                    <span class="help-block text-danger">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="mb-4">
-                                <label for="password" class="form-label">Password</label>
-                                <input id="password" type="password" class="form-control" name="password">
+                            <div class="form-floating mb-4">
+                                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                                <label for="password" class="form-label text-secondary">Password</label>
                                 @if ($errors->has('password'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
                             </div>
+                            {{-- block button --}}
                             <div class="d-grid">
                                 <button type="submit" class="btn text-light bg-primary mb-3">Login</button>
                             </div>
