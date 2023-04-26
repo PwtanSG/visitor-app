@@ -29,6 +29,7 @@ Route::post('/admin/logout', [LogoutController::class, 'store'])->name('logout')
 
 Route::get('/admin/visitor', [VisitorController::class, 'index'])->middleware('auth')->name('visitor');
 Route::get('/admin/visitor/{id}', [VisitorController::class,'show'])->middleware('auth');
+Route::put('/admin/visitor/{id}', [VisitorController::class,'update'])->middleware('auth');;
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::post('/admin/visitor/view-pdf', [VisitorController::class,'viewPDF'])->middleware('auth')->name('view-pdf');
 Route::post('/admin/visitor/download-pdf', [VisitorController::class,'downloadPDF'])->middleware('auth')->name('download-pdf');
