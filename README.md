@@ -4,7 +4,7 @@
     - Visitor registration page to fill name, email, contact, transport, purpose and supporting doc upload(optional)  
     - Admin login  
     - Admin Dashboard - track today's visitors count, monthly count
-    - Admin page to view list of all visitors and download list in pdf  
+    - Admin page to view list of all visitors, with filter, search feature and download list in pdf  
     - Admin page to checkout visitor  
 
 ## Page routes
