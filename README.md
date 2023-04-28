@@ -1,5 +1,11 @@
 ## Visitor Management System - using Laravel, Bootstrap and MySQL
 
+## Features
+    - Visitor registration page to fill name, email, contact, transport, purpose and supporting doc upload(optional)  \
+    - Admin login  \
+    - Admin page to view list of all visitors and download list in pdf  \
+    - Admin page to checkout visitor  \
+
 ## Page routes
 **Visitor registration page - no auth** \
     - /visitor/register
@@ -64,4 +70,4 @@
     - command : php artisan db:seed --class=AdminSeeder
 
 **6. demo screen recording** \
-    https://youtu.be/xMDUiJaUnaw
+    https://youtu.be/Rkdhy4nRgrw
