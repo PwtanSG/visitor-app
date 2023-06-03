@@ -50,13 +50,35 @@
                 View PDF
             </button>
         </form> --}}
-        <form action="{{ route('download-pdf') }}" method="post" target="__blank">
-            @csrf
-            {{-- <button class="text-white bg-primary">
-                Download PDF
-            </button> --}}
-            <button class="btn btn-primary" type="submit">Download PDF</button>
-        </form>
+        {{-- <div style="width:auto; margin: 0 auto;">
+            <div style="width: auto; float:left;" class="mx-auto">
+                <form action="{{ route('download-excel') }}" method="post" target="__blank">
+                    @csrf
+                    <button class="btn btn-secondary" type="submit">Download XLS</button>
+                </form>
+            </div>
+            <div style="width: 50% float: left;">
+                <form action="{{ route('download-pdf') }}" method="post" target="__blank">
+                    @csrf
+                    <button class="btn btn-primary" type="submit">Download PDF</button>
+                </form>
+            </div>
+        </div> --}}
+        <div>
+            <div class="d-inline">
+                <?php $disable = !$records->count() ? 'disabled' : ''; ?>
+                <form action="{{ route('download-pdf') }}" method="post" class="d-inline">
+                    @csrf
+                    <button class="btn btn-primary" type="submit" <?php echo $disable; ?>>Download PDF</button>
+                </form>
+            </div>
+            <div class="d-inline">
+                <form action="{{ route('download-excel') }}" method="post" target="__blank" class="d-inline">
+                    @csrf
+                    <button class="btn btn-secondary" type="submit" <?php echo $disable; ?>>Download XLS</button>
+                </form>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -93,9 +115,9 @@
                         <td>{{ $record->transport ?? '' }}</td>
                         <td>{{ $record->purpose }}</td>
                         @if ($record->filepath)
-                            <td><a href={{$record->filepath}}>Download</a></td>
+                            <td><a href={{ $record->filepath }}>Download</a></td>
                         @else
-                            <td>{{$record->filepath}}</td>
+                            <td>{{ $record->filepath }}</td>
                         @endif
                     </tr>
                 @endforeach

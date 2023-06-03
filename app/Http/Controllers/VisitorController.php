@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 // use PDF;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\VisitorExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class VisitorController extends Controller
@@ -81,9 +83,9 @@ class VisitorController extends Controller
 
         $filename = '';
         if ($request->hasFile('document')) {
-            $filename = $request->getSchemeAndHttpHost(). '/docs/' . time() . '.' . $request->document->extension();
+            $filename = $request->getSchemeAndHttpHost() . '/docs/' . time() . '.' . $request->document->extension();
             // dd($filename);
-            $request->document->move(public_path('/docs/'), $filename );
+            $request->document->move(public_path('/docs/'), $filename);
         }
 
 
@@ -130,7 +132,13 @@ class VisitorController extends Controller
     {
 
         $visitors = Visitor::all();
-        $pdf = PDF::loadView('pdf.visitorlist', array('visitors' => $visitors))->setPaper('a4', 'landscape');
-        return $pdf->download('visitors-list.pdf');
+        $pdf = PDF::loadView('exports.pdfvisitors', array('visitors' => $visitors))->setPaper('a4', 'landscape');
+        return $pdf->download('export_visitors_'.date("Ymd_His").'.pdf');
+    }
+
+    public function downloadExcel()
+    {
+        // $visitors = Visitor::all();
+        return Excel::download(new VisitorExport, 'export_visitors_'.date("Ymd_His").'.xlsx');
     }
 }

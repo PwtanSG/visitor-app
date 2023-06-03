@@ -33,6 +33,7 @@ Route::put('/admin/visitor/{id}', [VisitorController::class,'update'])->middlewa
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::post('/admin/visitor/view-pdf', [VisitorController::class,'viewPDF'])->middleware('auth')->name('view-pdf');
 Route::post('/admin/visitor/download-pdf', [VisitorController::class,'downloadPDF'])->middleware('auth')->name('download-pdf');
+Route::post('/admin/visitor/download-excel', [VisitorController::class,'downloadExcel'])->middleware('auth')->name('download-excel');
 // Route::get('/home', function () {
 //     return view('home');
 // });
