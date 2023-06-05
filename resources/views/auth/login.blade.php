@@ -41,7 +41,7 @@
                             <div class="form-floating mb-4">
                                 <input type="email" class="form-control" id="email" placeholder="Enter email"
                                     name="email" value="{{ old('email') }}">
-                                <label for="email" class="form-label text-secondary">Email</label>
+                                <label for="email" class="form-label text-secondary">Email (-> admin@email.com)</label>
                                 @if ($errors->has('email'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="form-floating mb-4">
                                 <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
-                                <label for="password" class="form-label text-secondary">Password</label>
+                                <label for="password" class="form-label text-secondary">Password (-> password)</label>
                                 @if ($errors->has('password'))
                                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('password') }}</strong>

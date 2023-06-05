@@ -65,6 +65,10 @@ class VisitorController extends Controller
 
     public function store(Request $request)
     {
+        $records = Visitor::all();
+        if ($records->count() > 20) {
+            return redirect('/visitor/register')->with('error', 'You have exceeded the limit.');
+        }
         // dd($request->all());
         $this->validate($request, [
             'name' => 'required|min:3',
