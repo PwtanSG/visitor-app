@@ -41,5 +41,5 @@ Route::post('/admin/visitor/download-pdf', [VisitorController::class,'downloadPD
 Route::post('/admin/visitor/download-excel', [VisitorController::class,'downloadExcel'])->middleware('auth')->name('download-excel');
 Route::get('/mail', function () {
     // return view('home');
-    // Mail::to('pwtan.work@gmail.com')->send(new HelloMail());
+    //Mail::to(env('MAIL_USERNAME'))->send(new HelloMail());
 });
