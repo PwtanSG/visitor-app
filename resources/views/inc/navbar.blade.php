@@ -18,6 +18,9 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/">Register Visitor</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/contact">Contact Us</a>
+                </li>
             </ul>
             <div class="d-flex">
                 @guest

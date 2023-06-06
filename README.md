@@ -32,6 +32,10 @@
 **admin checkout visitor** \
     - e.g http://visitor-app.test/admin/visitor/2 -> click checkout button 
 
+**Contact page - no auth** \
+    send email - contact form
+    - /contact
+    - e.g http://visitor-app.test/contact
 
 ## Steps to setup
 

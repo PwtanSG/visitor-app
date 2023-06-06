@@ -5,6 +5,9 @@ use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ContactController;
+use App\Mail\HelloMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [VisitorController::class,'create']);
 Route::post('/visitor', [VisitorController::class,'store']);
 Route::get('/visitor/register', [VisitorController::class,'create']);
+Route::get('/contact', [ContactController::class,'index']);
+Route::post('/contact/sendmail', [ContactController::class,'sendMail'])->name('send-mail');
 
 Route::get('/admin/login', [LoginController::class, 'index'])->name('login');
 Route::post('/admin/login', [LoginController::class, 'store']);
@@ -34,6 +39,7 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middlewar
 Route::post('/admin/visitor/view-pdf', [VisitorController::class,'viewPDF'])->middleware('auth')->name('view-pdf');
 Route::post('/admin/visitor/download-pdf', [VisitorController::class,'downloadPDF'])->middleware('auth')->name('download-pdf');
 Route::post('/admin/visitor/download-excel', [VisitorController::class,'downloadExcel'])->middleware('auth')->name('download-excel');
-// Route::get('/home', function () {
-//     return view('home');
-// });
+Route::get('/mail', function () {
+    // return view('home');
+    // Mail::to('pwtan.work@gmail.com')->send(new HelloMail());
+});
