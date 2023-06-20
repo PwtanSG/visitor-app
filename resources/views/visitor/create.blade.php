@@ -74,7 +74,7 @@
                     </span>
                 @endif
                 <textarea class="form-control {{ $errors->has('purpose') ? 'border border-danger' : '' }}" name="purpose"
-                    id="purpose" rows="3" cols="30" placeholder="Enter purpose of visit/remarks">{{ old('purpose') }}</textarea>
+                    id="purpose" rows="2" cols="30" placeholder="Enter purpose of visit/remarks">{{ old('purpose') }}</textarea>
             </div>
             <div class="form-group {{ $errors->has('document') ? ' has-error' : '' }} mt-2">
                 <label><strong> Document </strong><span class="text-danger"></span></label>
@@ -87,7 +87,14 @@
                     accept="image/png,.jpeg,.jpg,.pdf,.doc" name="document" id="document" placeholder="select file."
                     value="{{ old('document') }}">
             </div>
-
+            <!-- recaptcha-->
+            <br />
+            <div class="g-recaptcha" data-sitekey="{{config('services.recaptcha.key')}}"></div>
+            @if (Session::has('g-recaptcha-response'))
+                <p class="alert {{Session::get('alert-class')}}">
+                    {{Session::get('g-recaptcha-response')}}
+                </p>
+            @endif
 
             {{-- <input type="submit" name="send" value="Submit" class="btn btn-primary mt-3 col-12 col-sm-2"> --}}
             <Button type="submit" name="send" class="btn btn-primary mt-3 col-12 col-sm-2">

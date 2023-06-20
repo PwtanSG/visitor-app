@@ -12,7 +12,7 @@ use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\VisitorExport;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Illuminate\Support\Facades\Session;
 
 class VisitorController extends Controller
 {
@@ -77,6 +77,20 @@ class VisitorController extends Controller
             'purpose' => 'required|max:255',
             'transport' => 'required|max:10',
             // 'vehicle_no' => 'required_if:transport,vehicle'
+            'g-recaptcha-response' => function ($attribute, $value, $fail) {
+                $secretkey = config('services.recaptcha.secret');
+                $response = $value;
+                $userIP = $_SERVER['REMOTE_ADDR'];
+                $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretkey&response=$response&remoteip=$userIP";
+                $response = \file_get_contents($url);
+                $response = json_decode($response);
+                // dd($response);
+                if(!$response->success) {
+                    Session::flash('g-recaptcha-response', 'please check reCaptcha');
+                    Session::flash('alert-class', 'alert-danger');
+                    $fail($attribute.'Google reCatpcha failed');
+                }
+            },
         ], [
             '*.required' => 'This field is required',
             'name.min' => 'min 3 characters',
@@ -92,7 +106,7 @@ class VisitorController extends Controller
             $request->document->move(public_path('/docs/'), $filename);
         }
 
-
+        // dd($request);
         $current = Carbon::now();
         Visitor::create([
             'name' => htmlentities($request->name),
