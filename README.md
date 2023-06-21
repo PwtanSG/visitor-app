@@ -80,4 +80,3 @@ Deployed to AWS EC2 http://52.221.183.219/
 
 **6. demo screen recording** \
     https://youtu.be/U5fXBeXYsGw
-    https://youtu.be/Rkdhy4nRgrw
