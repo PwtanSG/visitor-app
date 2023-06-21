@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\VisitorExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class VisitorController extends Controller
 {
@@ -66,7 +67,7 @@ class VisitorController extends Controller
     public function store(Request $request)
     {
         $records = Visitor::all();
-        if ($records->count() > 20) {
+        if ($records->count() > 25) {
             return redirect('/visitor/register')->with('error', 'You have exceeded the limit.');
         }
         // dd($request->all());
@@ -76,6 +77,8 @@ class VisitorController extends Controller
             'email' => 'required|email',
             'purpose' => 'required|max:255',
             'transport' => 'required|max:10',
+            'document' => 'sometimes|required|mimes:jpeg,png,jpg,gif,svg,pdf,docx,doc|max:4096',
+            // 'document' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             // 'vehicle_no' => 'required_if:transport,vehicle'
             'g-recaptcha-response' => function ($attribute, $value, $fail) {
                 $secretkey = config('services.recaptcha.secret');
@@ -99,11 +102,20 @@ class VisitorController extends Controller
             // 'contact.required' => 'This field is required',
         ]);
 
-        $filename = '';
+        // $filename = '';
+        $filePathToDb = '';
+        // dd($request->document);
         if ($request->hasFile('document')) {
-            $filename = $request->getSchemeAndHttpHost() . '/docs/' . time() . '.' . $request->document->extension();
+            // $filename = $request->getSchemeAndHttpHost() . '/docs/' . time() . '.' . $request->document->extension();
             // dd($filename);
-            $request->document->move(public_path('/docs/'), $filename);
+            // $request->document->move(public_path('/docs/'), $filename);
+            // $filename = time() . '.' . $request->document->extension();
+            $fname = time() . '-' . $request->document->getClientOriginalName();
+            $fname = preg_replace("/\s+/", "", $fname);
+            $filePath = 'images/' . $fname;
+            // dd($filePath);
+            $path = Storage::disk('s3')->put($filePath, file_get_contents($request->document));
+            $filePathToDb = 'https://pwt-bucket-s3.s3.amazonaws.com/' . $filePath;
         }
 
         // dd($request);
@@ -115,7 +127,8 @@ class VisitorController extends Controller
             'purpose' => htmlentities($request->purpose),
             'datetime_in' => $current->toDateTimeString(),
             'transport' => $request->transport,
-            'filepath' => $filename,
+            'filepath' => $filePathToDb
+            // 'filepath' => $filename,
             // 'datetime_in' => date('Y-m-d H:i:s')
         ]);
 
