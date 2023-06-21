@@ -1,7 +1,10 @@
 ## Visitor Management System - using Laravel, Bootstrap and MySQL
+Deployed to AWS EC2 http://52.221.183.219/
 
 ## Features
+    - Deployed to AWS EC2 http://52.221.183.219/
     - Visitor registration page to fill name, email, contact, transport, purpose and supporting doc upload(optional)  
+    - Visitor registration page added Google ReCaptcha
     - Admin login  
     - Admin Dashboard - track today's visitors count, monthly count
     - Admin page to view list of all visitors, with filter, search feature and download list in pdf or Excel 
